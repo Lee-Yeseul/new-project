@@ -23,10 +23,11 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"]
-    }
+      "@components/*": ["src/components/*"]
+    },
+    "types": ["node"]
   },
+
   "include": ["src", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
