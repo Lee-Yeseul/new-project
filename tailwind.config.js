@@ -2,6 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      sm: "380px",
+      md: "680px",
+      lg: "920px",
+      xl: "1200px",
+    },
     extend: {
       keyframes: {
         "fade-in": {
