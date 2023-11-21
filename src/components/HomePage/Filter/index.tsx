@@ -1,55 +1,32 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import Item from "./Item";
+import useDetectElement from "@src/hooks/useDetectElement";
 
 export default function Filter() {
   const tempItem = Array.from({ length: 20 }, (_, index) => index + 1);
-  const leftElement = useRef<HTMLDivElement>(null);
-  const rightElement = useRef<HTMLDivElement>(null);
 
   const [leftScrollBtnVisibleState, setLeftScrollBtnVisible] = useState(false);
   const [rightScrollBtnVisibleState, setRightScrollBtnVisible] = useState(true);
 
+  const [setLeftScrollTarget] = useDetectElement({
+    threshold: 1,
+    onIntersect: useCallback(([{ isIntersecting }]) => {
+      if (isIntersecting) setLeftScrollBtnVisible(false);
+      else setLeftScrollBtnVisible(true);
+    }, []),
+  });
+
+  const [setRightScrollTarget] = useDetectElement({
+    threshold: 0.5,
+    onIntersect: useCallback(([{ isIntersecting }]) => {
+      if (isIntersecting) setRightScrollBtnVisible(false);
+      else setRightScrollBtnVisible(true);
+    }, []),
+  });
+
   const handleClickLeftScrollBtn = () => {
     console.log("scroll left");
   };
-
-  const handleLeftIntersect = useCallback(
-    ([left]: IntersectionObserverEntry[]) => {
-      if (left.isIntersecting) setLeftScrollBtnVisible(false);
-      else setLeftScrollBtnVisible(true);
-    },
-    []
-  );
-
-  const handleRightIntersect = useCallback(
-    ([right]: IntersectionObserverEntry[]) => {
-      if (right.isIntersecting) setRightScrollBtnVisible(false);
-      else setRightScrollBtnVisible(true);
-    },
-    []
-  );
-
-  useEffect(() => {
-    const leftObserver = new IntersectionObserver(handleLeftIntersect, {
-      threshold: 1,
-    });
-    if (leftElement.current) leftObserver.observe(leftElement.current);
-
-    return () => {
-      leftObserver.disconnect();
-    };
-  }, [handleLeftIntersect]);
-
-  useEffect(() => {
-    const rightObserver = new IntersectionObserver(handleRightIntersect, {
-      threshold: 0.5,
-    });
-    if (rightElement.current) rightObserver.observe(rightElement.current);
-
-    return () => {
-      rightObserver.disconnect();
-    };
-  }, [handleRightIntersect]);
 
   return (
     <div className="flex w-full items-center h-16 gap-3">
@@ -72,9 +49,9 @@ export default function Filter() {
             className="shrink-0"
             ref={
               id === 2
-                ? leftElement
+                ? setLeftScrollTarget
                 : id === tempItem.length
-                ? rightElement
+                ? setRightScrollTarget
                 : null
             }
           >
