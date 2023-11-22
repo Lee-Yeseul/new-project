@@ -89,9 +89,9 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden rounded-lg">
       <div
-        className="flex items-center rounded-lg"
+        className="flex items-center"
         ref={ref}
         style={style}
         onTouchStart={(e) => handleTouchStart(e)}
@@ -99,11 +99,7 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
         onTouchEnd={(e) => handleTouchEnd(e)}
       >
         {imageList.map((image, index) => (
-          <img
-            key={index}
-            className={`aspect-square rounded-lg`}
-            src={image.url}
-          />
+          <img key={index} className="aspect-square" src={image.url} />
         ))}
       </div>
       <button
