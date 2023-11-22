@@ -5,6 +5,7 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/vite-react-template/",
+
   resolve: {
     alias: [
       { find: "@src", replacement: resolve(__dirname, "src") },

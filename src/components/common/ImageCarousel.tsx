@@ -3,33 +3,104 @@ import { useRef, useState } from "react";
 interface CardProps {
   imageList: { id: number; url: string }[];
 }
-export default function ImageCarousel({ imageList }: CardProps) {
-  const ref = useRef(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+type MoveToNthSlide = (
+  targetImageIndex: number,
+  translateNumber: number
+) => void;
+
+export default function ImageCarousel({ imageList: data }: CardProps) {
+  const imageList = [data[data.length - 1], ...data, data[0]];
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [touch, setTouch] = useState({
+    start: 0,
+    end: 0,
+  });
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const [style, setStyle] = useState({
     transform: `translateX(-${currentImageIndex}00%)`,
+    transition: `all 0.4s ease-in-out`,
   });
 
+  const moveToNthSlide: MoveToNthSlide = (
+    targetImageIndex = 1,
+    translateNumber = 1
+  ) => {
+    setCurrentImageIndex(targetImageIndex);
+    setStyle({
+      transform: `translateX(-${translateNumber}00%)`,
+      transition: `0s`,
+    });
+  };
+
   const handleSwife = (direction: number) => {
-    if (currentImageIndex === 0 && direction < 0) return;
-    if (currentImageIndex === imageList.length - 1 && direction > 0) return;
     setCurrentImageIndex((prev) => prev + direction);
     setStyle({
       transform: `translateX(-${currentImageIndex + direction}00%)`,
+      transition: `all 0.4s ease-in-out`,
+    });
+    if (currentImageIndex === 1 && direction < 0) {
+      setTimeout(
+        () => moveToNthSlide(imageList.length - 1, imageList.length - 2),
+        500
+      );
+      return;
+    }
+    if (currentImageIndex === imageList.length - 2 && direction > 0) {
+      setTimeout(() => moveToNthSlide(1, 1), 500);
+      return;
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouch((prev) => {
+      return {
+        ...prev,
+        start: e.touches[0].pageX,
+      };
+    });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (ref.current) {
+      const current = ref.current.clientWidth * currentImageIndex;
+      const result = -current + (e.targetTouches[0].pageX - touch.start);
+      setStyle({
+        transform: `translate3d(${result}px, 0px, 0px)`,
+        transition: "0ms",
+      });
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    const end = e.changedTouches[0].pageX;
+    if (touch.start > end) {
+      handleSwife(1);
+    } else {
+      handleSwife(-1);
+    }
+    setTouch((prev) => {
+      return {
+        ...prev,
+        end,
+      };
     });
   };
 
   return (
     <div className="relative overflow-hidden">
       <div
-        className={`flex items-center ease-in-out duration-300 transition-all`}
+        className="flex items-center rounded-lg"
         ref={ref}
         style={style}
+        onTouchStart={(e) => handleTouchStart(e)}
+        onTouchMove={(e) => handleTouchMove(e)}
+        onTouchEnd={(e) => handleTouchEnd(e)}
       >
-        {imageList.map((image) => (
+        {imageList.map((image, index) => (
           <img
-            key={image.id}
+            key={index}
             className={`aspect-square rounded-lg`}
             src={image.url}
           />
@@ -37,23 +108,24 @@ export default function ImageCarousel({ imageList }: CardProps) {
       </div>
       <button
         onClick={() => handleSwife(-1)}
-        className={`absolute left-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500`}
+        className="absolute left-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500"
       >
         {"<"}
       </button>
 
       <button
         onClick={() => handleSwife(1)}
-        className={`absolute right-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500 `}
+        className="absolute right-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500"
       >
         {">"}
       </button>
       <div className="absolute bottom-2 w-full">
         <div className="flex justify-center items-center gap-1.5">
-          {imageList.map((image) => (
+          {data.map((image, index) => (
             <div
+              key={index}
               className={`rounded-full ${
-                image.id === currentImageIndex
+                image.id === currentImageIndex - 1
                   ? "bg-white w-2.5 h-2.5"
                   : "bg-gray-300 w-2 h-2"
               }`}
