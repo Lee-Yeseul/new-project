@@ -12,7 +12,7 @@ export default function SearchBar() {
   };
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <div className="flex items-center justify-between pl-6 pr-3 w-96 h-11 rounded-full shadow-md border-solid border-gray-300 border-[1px]">
+      <div className="flex items-center justify-between pl-6 pr-3 w-96 h-11 rounded-full shadow-md hover:shadow-lg border-solid border-gray-300 border-[1px]">
         <input
           ref={searchInputRef}
           className="h-full w-11/12 hover:border-none focus:outline-none"
@@ -23,7 +23,7 @@ export default function SearchBar() {
             width="32"
             height="32"
             fill="white"
-            className="rounded-full bg-pink-200 p-1"
+            className="rounded-full bg-pink-200 p-1 hover:bg-pink-300"
           />
         </button>
       </div>

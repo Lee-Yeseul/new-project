@@ -89,7 +89,7 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg">
+    <div className="relative overflow-hidden rounded-lg hover:cursor-pointer group">
       <div
         className="flex items-center"
         ref={ref}
@@ -104,14 +104,14 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
       </div>
       <button
         onClick={() => handleSwife(-1)}
-        className="absolute left-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500"
+        className="absolute left-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-sm shadow-grey-500 invisible group-hover:visible opacity-75 hover:opacity-100"
       >
         {"<"}
       </button>
 
       <button
         onClick={() => handleSwife(1)}
-        className="absolute right-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-lg shadow-grey-500"
+        className="absolute right-2 top-1/2 w-8 h-8 bg-gray-100 rounded-full p-2 hover:shadow-sm shadow-grey-500 invisible group-hover:visible opacity-75 hover:opacity-100"
       >
         {">"}
       </button>
