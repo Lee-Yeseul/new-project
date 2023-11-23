@@ -1,14 +1,15 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 
-function App() {
+export default function App() {
   return (
-    <Layout>
-      <div className="mt-5">
-        <HomePage />
-      </div>
-    </Layout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="dashboard" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
