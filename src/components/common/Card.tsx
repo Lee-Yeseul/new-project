@@ -11,6 +11,10 @@ interface CardProps {
     imageList: { id: number; url: string }[];
   };
 }
+
+/**
+ * TODO: card design component로 분리
+ */
 export default function Card({ cardInfo }: CardProps) {
   const { address, price, hashTags, imageList } = cardInfo;
   return (
