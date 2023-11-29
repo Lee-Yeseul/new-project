@@ -1,4 +1,6 @@
 import Dialog from "@src/components/common/Dialog";
+import MailIcon from "@src/assets/icons/mail.svg?react";
+import LockIcon from "@src/assets/icons/lock.svg?react";
 
 interface LoginDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void;
@@ -15,15 +17,21 @@ export default function LoginDialog({ setIsDialogOpen }: LoginDialogProps) {
       </Dialog.Header>
       <Dialog.Body className="w-full p-6 flex flex-col items-center justify-center">
         <form className="w-full">
-          <div className="mb-2">
+          <div className="relative mb-2">
+            <div className="absolute inset-y-0 start-2 flex items-center">
+              <MailIcon width="21" height="21" fill="grey" />
+            </div>
             <input
-              className="w-full h-12 p-2 border-1 border-solid border-gray-300 rounded-md focus:outline-none focus:border-gray-500 focus:rounded-md focus:border-1"
+              className="w-full h-12 ps-10 p-2 border-1 border-solid border-gray-300 rounded-md focus:outline-none focus:border-gray-500 focus:rounded-md focus:border-1"
               placeholder="이메일을 입력해주세요."
             />
           </div>
-          <div className="mb-4">
+          <div className="relative mb-2">
+            <div className="absolute inset-y-0 start-2 flex items-center">
+              <LockIcon width="21" height="21" fill="grey" />
+            </div>
             <input
-              className="w-full h-12 p-2 border-1 border-solid border-gray-300 rounded-md focus:outline-none focus:border-gray-500 focus:rounded-md focus:border-1"
+              className="w-full h-12 ps-10 p-2 border-1 border-solid border-gray-300 rounded-md focus:outline-none focus:border-gray-500 focus:rounded-md focus:border-1"
               placeholder="비밀번호를 입력하세요."
             />
           </div>
