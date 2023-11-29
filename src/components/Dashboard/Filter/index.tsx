@@ -36,7 +36,7 @@ export default function Filter() {
         }  absolute left-10 z-30 bg-white`}
       >
         <button
-          className="w-8 h-8 border-solid border-gray-300 border-[1px] rounded-full p-2 hover:shadow-md shadow-grey-500"
+          className="w-8 h-8 border-solid border-gray-300 border-1 rounded-full p-2 hover:shadow-md shadow-grey-500"
           onClick={handleClickLeftScrollBtn}
         >
           {"<"}
@@ -61,7 +61,7 @@ export default function Filter() {
       </div>
       <div>
         <button
-          className={`w-8 h-8 border-solid border-gray-300 border-[1px] rounded-full p-2 hover:shadow-md shadow-grey-500 ${
+          className={`w-8 h-8 border-solid border-gray-300 border-1 rounded-full p-2 hover:shadow-md shadow-grey-500 ${
             rightScrollBtnVisibleState ? "visible animate-fade-in" : "invisible"
           }`}
         >
@@ -69,7 +69,7 @@ export default function Filter() {
         </button>
       </div>
       <div className="basis-1/12 w-full flex justify-end">
-        <button className="border-solid border-grey-500 border-[1px] p-3 rounded-lg hover:shadow-md shadow-grey-500">
+        <button className="border-solid border-grey-500 border-1 p-3 rounded-lg hover:shadow-md shadow-grey-500">
           필터
         </button>
       </div>

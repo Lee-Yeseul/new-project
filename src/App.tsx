@@ -1,17 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
-import Detail from "./pages/Detail";
-import Maps from "./pages/Maps";
+import DashboardPage from "./pages/DashboardPage";
+import DetailPage from "./pages/DetailPage";
+import MapPage from "./pages/MapPage";
+import TestPage from "./pages/TestPage";
 
+/**
+ * TODO:
+ * - 404 페이지
+ * - 리다이렉트
+ */
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="dashboard" element={<HomePage />} />
-          <Route path="detail" element={<Detail />} />
-          <Route path="maps" element={<Maps />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="detail" element={<DetailPage />} />
+          <Route path="map" element={<MapPage />} />
+          <Route path="/*" element={<TestPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

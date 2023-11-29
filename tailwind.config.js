@@ -9,6 +9,12 @@ export default {
       xl: "1200px",
     },
     extend: {
+      colors: {
+        "black-rgba": "rgba(0, 0, 0, 0.2)",
+      },
+      borderWidth: {
+        1: "1px",
+      },
       keyframes: {
         "fade-in": {
           from: { opacity: "0" },
