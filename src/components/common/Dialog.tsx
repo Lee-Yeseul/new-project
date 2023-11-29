@@ -1,19 +1,15 @@
 import useOutSideClick from "@src/hooks/useOutSideClick";
-import { ReactNode, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import CloseIcon from "@src/assets/icons/close.svg?react";
 import Portal from "./Portal";
+import { CompoundItem } from "@src/types/common";
 
-type DialogItemProps = {
-  children?: ReactNode;
-  className?: string;
-};
-
-type DialogProps = DialogItemProps & {
+type DialogProps = CompoundItem & {
   onClickOutside: () => void;
 };
 
-type CloseButtonProps = DialogItemProps & {
+type CloseButtonProps = CompoundItem & {
   onClose: () => void;
 };
 
@@ -50,15 +46,15 @@ export default function Dialog({
   );
 }
 
-function Header({ children, className }: DialogItemProps) {
+function Header({ children, className }: CompoundItem) {
   return <div className={className}>{children}</div>;
 }
 
-function Body({ children, className }: DialogItemProps) {
+function Body({ children, className }: CompoundItem) {
   return <div className={className}>{children}</div>;
 }
 
-function Footer({ children, className }: DialogItemProps) {
+function Footer({ children, className }: CompoundItem) {
   return <div className={className}>{children}</div>;
 }
 

@@ -1,4 +1,4 @@
-import Dashboard from "@src/components/Dashboard";
+import CardList from "@src/components/Dashboard/CardList";
 import Filter from "@src/components/Dashboard/Filter";
 
 export default function DashboardPage() {
@@ -6,7 +6,7 @@ export default function DashboardPage() {
     <div className="w-full px-10">
       <Filter />
       <div className="pt-4">
-        <Dashboard />
+        <CardList />
       </div>
     </div>
   );

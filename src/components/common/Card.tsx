@@ -1,40 +1,28 @@
-import { moneyFormatting } from "@src/utils";
-import ImageCarousel from "./ImageCarousel";
-import { Link } from "react-router-dom";
+import { CompoundItem } from "@src/types/common";
 
-interface CardProps {
-  cardInfo: {
-    id: number;
-    address: string;
-    price: number;
-    hashTags: string[];
-    imageList: { id: number; url: string }[];
-  };
+export default function Card({ children }: CompoundItem) {
+  return <div>{children}</div>;
 }
 
-/**
- * TODO: card design component로 분리
- */
-export default function Card({ cardInfo }: CardProps) {
-  const { address, price, hashTags, imageList } = cardInfo;
+function Images({ children, className }: CompoundItem) {
   return (
-    <div className="flex flex-col items-center justify-center border-[0px] border-solid border-gray-300 rounded-lg">
-      <ImageCarousel imageList={imageList} />
-      <div className="w-full pt-3 leading-5 flex flex-col justify-center items-start">
-        <div>{address}</div>
-        <div>{`₩${moneyFormatting(price)}`}</div>
-        <div className="flex gap-2">
-          {hashTags.map((tag) => (
-            <Link
-              to="http://naver.com"
-              key={tag}
-              className="flex items-center text-sm text-gray-500 hover:text-gray-800 hover:underline"
-            >
-              <span>#{tag}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+    <div
+      className={`flex flex-col items-center justify-center border-[0px] border-solid border-gray-300 rounded-lg ${className}`}
+    >
+      {children}
     </div>
   );
 }
+
+function Description({ children, className }: CompoundItem) {
+  return (
+    <div
+      className={`w-full pt-3 leading-5 flex flex-col justify-center items-start ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+Card.Description = Description;
+Card.Images = Images;
