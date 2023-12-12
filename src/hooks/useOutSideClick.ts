@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect } from "react";
 
-export default function useOutSideClick(
+export default function useOutsideClick(
   ref: MutableRefObject<HTMLElement | null>,
   callback: () => void
 ) {

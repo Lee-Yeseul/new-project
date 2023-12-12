@@ -1,4 +1,4 @@
-import useOutSideClick from "@src/hooks/useOutSideClick";
+import useOutsideClick from "@src/hooks/useOutsideClick";
 import { useEffect, useRef } from "react";
 
 import CloseIcon from "@src/assets/icons/close.svg?react";
@@ -19,7 +19,7 @@ export default function Dialog({
   className,
 }: DialogProps) {
   const dialogRef = useRef(null);
-  useOutSideClick(dialogRef, onClickOutside);
+  useOutsideClick(dialogRef, onClickOutside);
 
   useEffect(() => {
     const $body = document.querySelector("body");

@@ -17,6 +17,10 @@ export default function Menu() {
     setIsDropdownButtonClicked(false);
   };
 
+  const onClickOutsideToggle = () => {
+    setIsDropdownButtonClicked(false);
+  };
+
   return (
     <div className="relative">
       <button
@@ -27,7 +31,10 @@ export default function Menu() {
         <AccountIcon width="32" height="32" fill="#9ca3af" />
       </button>
       {isDropdownButtonClicked && (
-        <Dropdown className="bg-white right-0 mt-1.5 rounded-md divide-y-1 divide-solid divide-gray-300 z-[100]">
+        <Dropdown
+          onClickOutside={onClickOutsideToggle}
+          className="bg-white right-0 mt-1.5 rounded-md divide-y-1 divide-solid divide-gray-300 z-[100]"
+        >
           <Dropdown.Item
             className="w-56 h-10 text-sm rounded-t-md hover:bg-gray-50 hover:cursor-pointer"
             onClick={() => onClickLogin()}
