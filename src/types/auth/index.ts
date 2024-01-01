@@ -5,7 +5,7 @@ export type UserInfo = {
 };
 
 export type SignUpParams = UserInfo;
-export type SignInParams = Pick<UserInfo, "email" | "password">;
+
 export type SignInResponse = {
   accessToken: string;
 };

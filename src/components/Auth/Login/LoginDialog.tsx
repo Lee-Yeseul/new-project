@@ -1,10 +1,9 @@
 import Dialog from "@src/components/common/Dialog";
-
 import { useSignInMutation } from "@src/hooks/querys/auth";
-import { SignInParams, SignInResponse } from "@src/types/auth";
+import { SignInResponse } from "@src/types/auth";
 import { storage } from "@src/utils/storage";
-
 import Form from "@src/components/common/Form";
+import { SignInSchema, signInSchema } from "@src/schema/auth";
 
 interface LoginDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void;
@@ -23,7 +22,7 @@ export default function LoginDialog({ setIsDialogOpen }: LoginDialogProps) {
 
   const { mutate } = useSignInMutation(handleLoginSuccess, handleLoginError);
 
-  const onSubmit = (data: SignInParams) => {
+  const onSubmit = (data: SignInSchema) => {
     mutate(data);
   };
 
@@ -37,7 +36,8 @@ export default function LoginDialog({ setIsDialogOpen }: LoginDialogProps) {
         <div className="text-lg font-bold">로그인</div>
       </Dialog.Header>
       <Dialog.Body className="w-full p-6 flex flex-col items-center justify-center">
-        <Form<SignInParams>
+        <Form<SignInSchema>
+          schema={signInSchema}
           handleSubmit={(data) => onSubmit(data)}
           className="w-full flex flex-col gap-1"
         >
@@ -45,25 +45,11 @@ export default function LoginDialog({ setIsDialogOpen }: LoginDialogProps) {
             name="email"
             placeholder="test@test.com"
             className="w-full h-12 ps-5 p-2 border-gray-300 rounded-md"
-            required="이메일을 입력해주세요."
-            validation={{
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "이메일 형식에 맞지 않습니다.",
-              },
-            }}
           />
           <Form.Input
             name="password"
             placeholder="********"
             className="w-full h-12 ps-5 p-2 border-gray-300 rounded-md"
-            required="비밀번호를 입력해주세요."
-            validation={{
-              minLength: {
-                value: 8,
-                message: "8자리 이상 비밀번호를 사용하세요.",
-              },
-            }}
           />
           <Form.SubmitButton className="mt-2 w-full h-12 border-solid border-gray-400 border-1 rounded-md hover:bg-gray-50">
             로그인
