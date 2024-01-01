@@ -2,19 +2,23 @@ import { useState } from "react";
 import Dropdown from "@src/components/common/Dropdown";
 import MenuIcon from "@src/assets/icons/menu.svg?react";
 import AccountIcon from "@src/assets/icons/account.svg?react";
-import LoginDialog from "@src/components/Auth/Login/LoginDialog";
+import SignInDialog from "@src/components/Auth/SignIn/SignInDialog";
 
 export default function Menu() {
   const [isDropdownButtonClicked, setIsDropdownButtonClicked] = useState(false);
-  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
 
   const onClickMenuButton = () => {
     setIsDropdownButtonClicked((prev) => !prev);
   };
 
-  const onClickLogin = () => {
-    setIsLoginDialogOpen(true);
+  const onClickSignIn = () => {
+    setIsSignInDialogOpen(true);
     setIsDropdownButtonClicked(false);
+  };
+
+  const onClickSignUp = () => {
+    console.log("signUp");
   };
 
   const onClickOutsideToggle = () => {
@@ -37,22 +41,24 @@ export default function Menu() {
         >
           <Dropdown.Item
             className="w-56 h-10 text-sm rounded-t-md hover:bg-gray-50 hover:cursor-pointer"
-            onClick={() => onClickLogin()}
+            onClick={() => onClickSignIn()}
           >
             로그인
           </Dropdown.Item>
           <Dropdown.Item
             className="w-56 h-10 text-sm rounded-b-md hover:bg-gray-50 hover:cursor-pointer"
-            onClick={() => onClickLogin()}
+            onClick={() => onClickSignUp()}
           >
             회원가입
           </Dropdown.Item>
         </Dropdown>
       )}
 
-      {isLoginDialogOpen && (
-        <LoginDialog
-          setIsDialogOpen={(isDialogOpen) => setIsLoginDialogOpen(isDialogOpen)}
+      {isSignInDialogOpen && (
+        <SignInDialog
+          setIsDialogOpen={(isDialogOpen) =>
+            setIsSignInDialogOpen(isDialogOpen)
+          }
         />
       )}
     </div>

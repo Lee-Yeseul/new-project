@@ -5,22 +5,22 @@ import { storage } from "@src/utils/storage";
 import Form from "@src/components/common/Form";
 import { SignInSchema, signInSchema } from "@src/schema/auth";
 
-interface LoginDialogProps {
+interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void;
 }
-export default function LoginDialog({ setIsDialogOpen }: LoginDialogProps) {
+export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
   const store = storage("sessionStorage");
 
-  const handleLoginSuccess = (accessToken: SignInResponse) => {
+  const handleSignInSuccess = (accessToken: SignInResponse) => {
     store.set(accessToken);
     setIsDialogOpen(false);
   };
 
-  const handleLoginError = (error: Error) => {
+  const handleSignInError = (error: Error) => {
     console.log(error);
   };
 
-  const { mutate } = useSignInMutation(handleLoginSuccess, handleLoginError);
+  const { mutate } = useSignInMutation(handleSignInSuccess, handleSignInError);
 
   const onSubmit = (data: SignInSchema) => {
     mutate(data);
