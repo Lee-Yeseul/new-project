@@ -11,8 +11,8 @@ type FormProps<T extends FieldValues> = CompoundItem & {
 
 type InputProps = CompoundItem & {
   name: string;
-
   placeholder: string;
+  type?: string;
 };
 
 /**
@@ -53,14 +53,16 @@ export default function Form<Schema extends FieldValues>({
   );
 }
 
-function Input({ className, name, placeholder }: InputProps) {
+function Input({ className, name, placeholder, type }: InputProps) {
   const { register, errors } = useContext(FormContext);
   return (
-    <div>
+    <>
       <input
-        className={`border-1 border-solid focus:outline-none focus:border-gray-400 focus:border-1 ${className}`}
+        className={`${
+          errors[name] ? "border-red-500" : ""
+        } border-1 border-solid focus:outline-none focus:border-gray-400 focus:border-1 ${className}`}
         placeholder={placeholder}
-        type={name}
+        type={type ?? name}
         {...register(name)}
       />
       {errors[name] && (
@@ -68,7 +70,7 @@ function Input({ className, name, placeholder }: InputProps) {
           {errors[name].message}
         </small>
       )}
-    </div>
+    </>
   );
 }
 

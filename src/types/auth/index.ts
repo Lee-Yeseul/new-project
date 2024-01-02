@@ -4,8 +4,6 @@ export type UserInfo = {
   username: string;
 };
 
-export type SignUpParams = UserInfo;
-
 export type SignInResponse = {
   accessToken: string;
 };
