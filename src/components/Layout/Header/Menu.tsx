@@ -3,10 +3,13 @@ import Dropdown from "@src/components/common/Dropdown";
 import MenuIcon from "@src/assets/icons/menu.svg?react";
 import AccountIcon from "@src/assets/icons/account.svg?react";
 import SignInDialog from "@src/components/Auth/SignIn/SignInDialog";
+import { useNavigate } from "react-router-dom";
 
 export default function Menu() {
   const [isDropdownButtonClicked, setIsDropdownButtonClicked] = useState(false);
   const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const onClickMenuButton = () => {
     setIsDropdownButtonClicked((prev) => !prev);
@@ -18,7 +21,7 @@ export default function Menu() {
   };
 
   const onClickSignUp = () => {
-    console.log("signUp");
+    navigate("/signup");
   };
 
   const onClickOutsideToggle = () => {
