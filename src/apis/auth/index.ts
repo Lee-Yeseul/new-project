@@ -12,4 +12,7 @@ export const authAPI = {
   signUp: (bodyData: SignUpSchema): APIResponse<SignInResponse> => {
     return instance.post(`${basicPathName}/signup`, bodyData);
   },
+  postKakaoLoginCode: (code: string): APIResponse<SignInResponse> => {
+    return instance.post(`${basicPathName}/kakao-code`, { code });
+  },
 };

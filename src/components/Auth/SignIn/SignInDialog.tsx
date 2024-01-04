@@ -4,6 +4,7 @@ import { SignInResponse } from "@src/types/auth";
 import { storage } from "@src/utils/storage";
 import Form from "@src/components/common/Form";
 import { SignInSchema, signInSchema } from "@src/schema/auth";
+import KakaoSignIn from "./KakaoSignIn";
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void;
@@ -62,9 +63,7 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
         </div>
 
         <div className="w-full flex flex-col items-center justify-around gap-2">
-          <button className="w-full h-12 border-solid border-gray-400 border-1 rounded-md hover:bg-gray-50">
-            카카오로 로그인하기
-          </button>
+          <KakaoSignIn />
           <button className="w-full h-12 border-solid border-gray-400 border-1 rounded-md hover:bg-gray-50">
             네이버로 로그인하기
           </button>

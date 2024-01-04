@@ -22,3 +22,14 @@ export const useSignUpMutation = (errorCallback: (error: Error) => void) => {
     onError: (error) => errorCallback(error),
   });
 };
+
+export const useKakaoLoginCodeMutation = (
+  successCallback: (data: SignInResponse) => void,
+  errorCallback: (error: Error) => void
+) => {
+  return useMutation({
+    mutationFn: (code: string) => authAPI.postKakaoLoginCode(code),
+    onSuccess: ({ data }) => successCallback(data),
+    onError: (error) => errorCallback(error),
+  });
+};

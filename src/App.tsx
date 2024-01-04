@@ -6,6 +6,7 @@ import MapPage from "./pages/MapPage";
 import TestPage from "./pages/TestPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SignUpPage from "./pages/SignUpPage";
+import KakaoRedirect from "./pages/KakaoRedirectPage";
 
 /**
  * TODO:
@@ -20,6 +21,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="signup" element={<SignUpPage />} />
+            <Route path="auth/kakao" element={<KakaoRedirect />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="detail" element={<DetailPage />} />
             <Route path="map" element={<MapPage />} />
